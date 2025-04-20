@@ -1,0 +1,43 @@
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav_container{
+    width: 100%;
+
+    display: flex;
+    justify-content: start;
+
+    padding-top: 20px;
+}
+.logo{
+    width: 80px;
+    margin-left: 40px;
+}
+.header{
+    font-family: "Sofia Sans", serif;
+    font-size: 34px;
+    width:60%;
+    margin: 0 auto;
+    text-align: start;
+    margin-top: 40px;
+
+
+}
+.btn{
+    background: #eff3f4;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    color: #222222;
+    font-family: "Sofia Sans", serif;
+}
+.btn:hover{
+    background: #e6e6e6;
+    border: none;
+}

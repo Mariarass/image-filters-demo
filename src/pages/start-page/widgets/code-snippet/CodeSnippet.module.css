@@ -1,0 +1,41 @@
+
+.container {
+    position: relative;
+    z-index: 9999;
+
+}
+.container pre {
+    border-radius: 10px;
+    overflow: hidden;
+    padding-right: 50px !important;
+    background: #F1F1F1 !important;
+}
+.copy_container {
+    position: absolute;
+    display: inline-block;
+    right: 10px;
+    top:15px;
+}
+.tooltip {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 5px 8px;
+    font-size: 12px;
+    border-radius: 5px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.copy_container:hover .tooltip {
+    opacity: 1;
+}
+
+.copy{
+    width: 14px;
+    right: 10px;
+}

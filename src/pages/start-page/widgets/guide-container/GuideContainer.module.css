@@ -1,0 +1,21 @@
+.container{
+    width: 65%;
+    margin-top: 60px;
+}
+.block_container{
+
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-bottom: 60px;
+}
+
+.header{
+    font-family: "Sofia Sans", serif;
+    font-weight: 700;
+    font-size: 16px;
+}
+.list{
+    display: flex;
+    gap: 10px;
+}
