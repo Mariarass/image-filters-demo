@@ -11,11 +11,18 @@
 }
 
 .header{
-    font-family: "Sofia Sans", serif;
+    font-family: "Inter Variable", "Inter Placeholder", sans-serif;
     font-weight: 700;
     font-size: 16px;
+    color: #F9F9F9;
 }
 .list{
     display: flex;
     gap: 10px;
+}
+.text{
+    color: #929394;
+    font-family: "Inter Variable", "Inter Placeholder", sans-serif;
+    font-size: 16px;
+
 }

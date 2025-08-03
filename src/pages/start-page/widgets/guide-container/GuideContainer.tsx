@@ -17,13 +17,13 @@ const filterList: string[] = [
 const GuideContainer = () => {
     const defaultExample = `
 <ImageFilter 
-  imageUrl="https://simpleecreate.com/images/rCfBiP7oGHVJOWMPHhY365ZGlWt3bjQGLXQq38bP.png"
+  imageUrl="https://mariarass.github.io/photo-hosting/image.jpg"
   filter="vintageFilm" 
 />`;
 
     const advancedExample = `
 <ImageFilter
-  imageUrl="https://simpleecreate.com/images/rCfBiP7oGHVJOWMPHhY365ZGlWt3bjQGLXQq38bP.png"
+  imageUrl="https://mariarass.github.io/photo-hosting/image.jpg"
   styles={{ borderRadius: '5px' }}
   filter="vintageFilm"
   contrast={100}
@@ -36,6 +36,14 @@ const GuideContainer = () => {
   grain={0}
   vignette={0}
   shadows={0}
+/>`;
+
+const saveExample = `
+<ImageFilter
+  imageUrl="https://mariarass.github.io/photo-hosting/image.jpg"
+  saveImage={(file) => {
+    console.log('savedImage', file);
+  }}
 />`;
 
     const previewExample = `
@@ -52,7 +60,7 @@ const filterOptions = [
 {filterOptions.map((filter) => (
   <ImageFilter 
     key={filter}
-    imageUrl="https://simpleecreate.com/images/rCfBiP7oGHVJOWMPHhY365ZGlWt3bjQGLXQq38bP.png"
+    imageUrl="https://mariarass.github.io/photo-hosting/image.jpg"
     filter={filter}
     styles={{ borderRadius: '5px', width: '100px', height: '100px' }}
     preview={true}
@@ -80,6 +88,14 @@ const filterOptions = [
             </div>
 
             <div className={s.block_container}>
+                <p className={s.header}>SAVE YOUR IMAGE</p>
+                <p className={s.text}>
+                    You can save your image to your device.
+                </p>
+                <CodeSnippet code={saveExample} />
+            </div>
+
+            <div className={s.block_container}>
                 <p className={s.header}>FILTER PREVIEWS <span>(default filters only)</span></p>
                 <p className={s.text}>
                     You can preview default filters in small thumbnails. This helps users choose the best one.
@@ -88,7 +104,7 @@ const filterOptions = [
                     {filterList.map((filter) => (
                         <ImageFilter
                             key={filter}
-                            imageUrl="https://simpleecreate.com/images/rCfBiP7oGHVJOWMPHhY365ZGlWt3bjQGLXQq38bP.png"
+                            imageUrl="https://mariarass.github.io/photo-hosting/image.jpg"
                             filter={filter}
                             styles={{ borderRadius: '5px', width: '100px', height: '100px' }}
                             preview={true}

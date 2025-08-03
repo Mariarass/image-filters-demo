@@ -16,7 +16,8 @@
     justify-content: space-between;
 
     padding: 40px;
-    padding-top: 40px;
+    padding-bottom: 20px;
+
     height: 65%;
 }
 .filter_control{
@@ -26,7 +27,7 @@
 
 }
 .filter_label{
-    font-family: "Lato", serif;
+    font-family: "Inter Variable", "Inter Placeholder", sans-serif;
     font-weight: 400;
     font-size: 14px;
     margin-bottom: 10px;
@@ -95,6 +96,30 @@
     overflow-x: scroll;
 
 }
+
+
+  
+  .bottom_container::-webkit-scrollbar {
+    width: 4px;
+    height: 20px;
+    background: #ffffff;
+  }
+  
+  .bottom_container::-webkit-scrollbar-thumb {
+    background: #d3d3d3;
+    border-radius: 10px;
+    border: 8px solid #ffffff;
+  }
+  
+  .bottom_container::-webkit-scrollbar-thumb:hover {
+    background: #c7c7c7;
+    width: 8px;
+    border-radius: 14px;
+    border: 12px solid #ffffff;
+  }
+
+  
+
 .category_title{
     font-size: 14px;
     font-family: "Lato", serif;
@@ -122,4 +147,39 @@
   
     height: 100%;
 
+}
+
+.image_container{
+    width: 60%;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+.download_button{
+
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+    margin-bottom: 20px;
+    margin-right: 40px;
+    position: absolute;
+   bottom: 0;
+   right: 0;
+}
+
+.button{
+    background: rgb(253, 253, 253);
+    border-radius: 4px;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    font-family: "Inter Variable", "Inter Placeholder", sans-serif;
+    font-size: 14px;
+    color: #000000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.button:hover{
+    transform: scale(1.05);
+    background: rgb(228, 228, 228);
 }

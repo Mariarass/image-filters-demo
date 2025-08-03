@@ -9,54 +9,59 @@
     width: 100%;
     background: transparent;
     outline: none;
-    /* Сбрасываем стандартный вид для WebKit */
+
     -webkit-appearance: none;
-    /* Сбрасываем стандартный вид для Firefox */
+   
     -moz-appearance: none;
+    cursor: pointer;
 }
 
-/* СТИЛИ ДЛЯ ПОЛОСЫ (TRACK) */
 
-/* Chrome, Safari, Opera */
 .slider_input::-webkit-slider-runnable-track {
     height: 2px;
-    background: #999; /* Цвет серой полосы */
+    background: #999; 
     border-radius: 2px;
 }
 
-/* Firefox */
+
 .slider_input::-moz-range-track {
     height: 2px;
     background: #999;
     border-radius: 2px;
 }
 
-/* СТИЛИ ДЛЯ ПОЛЗУНКА (THUMB) */
-
-/* Chrome, Safari, Opera */
 .slider_input::-webkit-slider-thumb {
     -webkit-appearance: none;
-    height: 10px;
-    width: 10px;
-    margin-top: -3px; /* Чтобы центрировать круг на полосе */
-    background: #8e005f; /* Цвет кружка */
+    height: 13px;
+    width:13px;
+    margin-top: -7px; 
+    background: #5a6a6f; 
     border-radius: 50%;
     cursor: pointer;
+
+    transition: all 0.3s ease;
+
 }
 
-/* Firefox */
+.slider_input::-webkit-slider-thumb:hover {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+   
+
+}
+
 .slider_input::-moz-range-thumb {
     height: 16px;
     width: 16px;
-    background: #8e005f;
+    background: #5a6a6f;
     border-radius: 50%;
     cursor: pointer;
 }
 
-/* Эффект при фокусе (по желанию) */
 .slider_input:focus::-webkit-slider-thumb {
-    outline: 2px solid #8e005f;
+    outline: 2px solid #5a6a6f;
 }
 .slider_input:focus::-moz-range-thumb {
-    outline: 2px solid #8e005f;
+    outline: 2px solid #5a6a6f;
 }

@@ -1,25 +1,26 @@
-import React, { useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import ImageFilter from 'react-image-filters-tool';
 import s from './LibraryFeatures.module.css';
 import Slider from '../../../../shared/ui/input/Slider.tsx';
 
 const LibraryFeatures = () => {
-  const [imageUrl] = useState(
-    'https://simpleecreate.com/images/rCfBiP7oGHVJOWMPHhY365ZGlWt3bjQGLXQq38bP.png'
-  );
+  const [imageUrl, setImageUrl] = useState('https://mariarass.github.io/photo-hosting/image.jpg');
   const [activeFilter, setActiveFilter] = useState('none');
+  const [savedImage, setSavedImage] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const initialSettings = {
-    brightness: 100,
-    contrast: 100,
-    saturation: 100,
-    shadows: 100,
+    brightness: 1,
+    contrast: 1,
+    saturation: 1,
+    shadows: 1,
     redChannel: 1,
     greenChannel: 1,
     blueChannel: 1,
     hueRotate: 0,
     grain: 0,
     vignette: 0,
+    highlights: 0,
   };
 
   type Settings = typeof initialSettings;
@@ -28,10 +29,11 @@ const LibraryFeatures = () => {
   const [settings, setSettings] = useState<Settings>(initialSettings);
 
   const filterSettings: { key: SettingsKey; label: string; min: number; max: number; step: number }[] = [
-    { key: 'brightness', label: 'Brightness', min: 0, max: 200, step: 1 },
-    { key: 'contrast', label: 'Contrast', min: 0, max: 200, step: 1 },
-    { key: 'saturation', label: 'Saturation', min: 0, max: 200, step: 1 },
-    { key: 'shadows', label: 'Shadows', min: 0, max: 300, step: 1 },
+    { key: 'brightness', label: 'Brightness', min: -100, max: 100, step: 1 },
+    { key: 'contrast', label: 'Contrast', min: -100, max: 100, step: 1 },
+    { key: 'saturation', label: 'Saturation', min: -100, max: 100, step: 1 },
+    { key: 'shadows', label: 'Shadows', min: -100, max: 100, step: 1 },
+    {key: 'highlights', label: 'Highlights', min: -100, max: 100, step: 1 },
     { key: 'redChannel', label: 'Red', min: 0, max: 5, step: 0.1 },
     { key: 'greenChannel', label: 'Green', min: 0, max: 5, step: 0.1 },
     { key: 'blueChannel', label: 'Blue', min: 0, max: 5, step: 0.1 },
@@ -50,11 +52,78 @@ const LibraryFeatures = () => {
   const handleChange = (key: SettingsKey, value: number) => {
     setSettings((prev) => ({ ...prev, [key]: value }));
   };
+  const handleDownload = () => {
+    if (!savedImage) return;
+    console.log(savedImage)
+    const url = URL.createObjectURL(savedImage);
+    console.log(url)
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = savedImage.name || 'filtered-image.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setImageUrl(url);
+    }
+  };
+
+  const handleClearSettings = () => {
+    setSettings(initialSettings);
+  };
+
+  const codeSnippet = useMemo(() => {
+    const {
+      brightness,
+      contrast,
+      saturation,
+      shadows,
+      highlights,
+      hueRotate,
+      grain,
+      vignette,
+      redChannel,
+      greenChannel,
+      blueChannel,
+    } = settings;
+  
+    const lines = [
+      `${activeFilter}: {`,
+      `  brightness: ${(brightness / 100).toFixed(2)},`,
+      `  contrast: ${(contrast / 100).toFixed(2)},`,
+      `  highlights: ${(highlights / 100).toFixed(2)},`,
+      `  hueRotate: ${hueRotate},`,
+      `  saturate: ${(saturation / 100).toFixed(2)},`,
+      `  shadows: ${(shadows / 100).toFixed(2)},`,
+      `  grain: ${(grain / 100).toFixed(2)},`,
+      `  vignette: ${(vignette / 100).toFixed(2)},`,
+      `  colorMatrix: new Float32Array([`,
+      `    ${redChannel.toFixed(2)}, 0,           0,           0,`,
+      `    0,           ${greenChannel.toFixed(2)}, 0,           0,`,
+      `    0,           0,           ${blueChannel.toFixed(2)}, 0,`,
+      `    0,           0,           0,           1,`,
+      `  ]),`,
+      `},`,
+    ];
+  
+    return lines.join('\n');
+  }, [settings, activeFilter]);
 
   return (
     <div className={s.container}>
       <div className={s.top_container}>
         <div className={s.settings}>
+        
           {filterSettings.map(({ key, label, min, max, step }) => (
             <div key={key} className={s.filter_row}>
               <div className={s.filter_label}>{label}</div>
@@ -70,19 +139,38 @@ const LibraryFeatures = () => {
             </div>
           ))}
         </div>
-
-        <ImageFilter
-          filter={activeFilter}
-          imageUrl={imageUrl}
-          {...settings}
-          styles={{ width: '60%', borderRadius: 5, position: 'relative' }}
-        />
+        
+      <div className={s.image_container}>
+      <ImageFilter
+                filter={activeFilter}
+                imageUrl={imageUrl}
+                {...settings}
+                saveImage={(file) => setSavedImage(file)}
+              />
+              
+      <div className={s.download_button}>
+          <button onClick={handleDownload} className={s.button}>Download Image</button>
+          <button onClick={handleUploadClick} className={s.button}>Upload New image</button>
+          <input
+            type="file"
+            accept="image/*"
+            style={{ display: 'none' }}
+            ref={fileInputRef}
+            onChange={handleFileChange}
+          />
+          <button onClick={handleClearSettings} className={s.button}>Clear Settings</button>
+        </div>
       </div>
+        
+      </div>
+     
+      {/* <CodeSnippet code={codeSnippet} /> */}
+   
 
       <div className={s.bottom_container}>
         {Object.entries(categorizedFilters).map(([category, filters]) => (
           <div key={category} className={s.filter_category}>
-            <p className={s.category_title}>{category}</p>
+           
             <div className={s.filter_list}>
               {filters.map((filter) => (
                 <div

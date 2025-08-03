@@ -8,7 +8,9 @@
     border-radius: 10px;
     overflow: hidden;
     padding-right: 50px !important;
-    background: #F1F1F1 !important;
+    background: #181C1E !important;
+    border: 1px solid #232C2F;
+    color: #F9F9F9;
 }
 .copy_container {
     position: absolute;

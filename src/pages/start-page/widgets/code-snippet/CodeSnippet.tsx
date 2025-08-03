@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import copyIcon from '../../../../assets/image/copy-icon-1700x2048-cphbgd2b.png';
 import s from './CodeSnippet.module.css';
+import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 type CodeSnippetProps = {
     code: string;
@@ -35,7 +36,7 @@ const CodeSnippet: React.FC<CodeSnippetProps> = ({ code }) => {
                 {showTooltip && <span className={s.tooltip}>{copyStatus}</span>}
             </div>
 
-            <SyntaxHighlighter language="jsx">
+                <SyntaxHighlighter language="javascript" style={a11yDark}>
                 {code}
             </SyntaxHighlighter>
         </div>
