@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/image-filters-demo/static/css/main.947b64e4.css",
-    "main.js": "/image-filters-demo/static/js/main.048b8c06.js",
+    "main.js": "/image-filters-demo/static/js/main.b2c59a74.js",
     "static/media/copy-icon-1700x2048-cphbgd2b.png": "/image-filters-demo/static/media/copy-icon-1700x2048-cphbgd2b.3ddb2cb4c7601086a81b.png",
     "static/media/noise.svg": "/image-filters-demo/static/media/noise.7d125d60ddfc1e3331ed.svg",
     "index.html": "/image-filters-demo/index.html",
     "main.947b64e4.css.map": "/image-filters-demo/static/css/main.947b64e4.css.map",
-    "main.048b8c06.js.map": "/image-filters-demo/static/js/main.048b8c06.js.map"
+    "main.b2c59a74.js.map": "/image-filters-demo/static/js/main.b2c59a74.js.map"
   },
   "entrypoints": [
     "static/css/main.947b64e4.css",
-    "static/js/main.048b8c06.js"
+    "static/js/main.b2c59a74.js"
   ]
 }
