@@ -42,12 +42,12 @@ const LibraryFeatures = () => {
     { key: 'vignette', label: 'Vignette', min: 0, max: 300, step: 10 },
   ];
 
-  const categorizedFilters = {
-    'Warm filters': ['none', 'roseTint', 'sunsetDream', 'rusticSunset', 'sunKissed', 'goldenHour', 'amberGlow'],
-    'Cold filters': ['cozySnow', 'blueLagoon', 'arcticInversion', 'deepBlue', 'cool', 'oceanBreeze'],
-    Other: ['retro', 'pastel', 'vintage', 'vintageFilm'],
-    Mood: ['lavenderHaze', 'deep', 'moody', 'grayscale', 'noir', 'saturate', 'sepia', 'hue', 'fancyEffect', 'emeraldGlow'],
-  };
+  const allFilters = [
+    'none','tokyo','malibu', 'alpine', 'grave','amazon','roseTint', 'sunsetDream', 'rusticSunset', 'sunKissed', 'goldenHour', 'amberGlow',
+    'cozySnow', 'blueLagoon', 'arcticInversion', 'deepBlue', 'cool', 'oceanBreeze',
+    'retro', 'pastel', 'vintage', 'vintageFilm',
+    'lavenderHaze', 'deep', 'moody', 'grayscale', 'noir', 'saturate', 'sepia', 'hue', 'fancyEffect', 'emeraldGlow',
+  ];
 
   const handleChange = (key: SettingsKey, value: number) => {
     setSettings((prev) => ({ ...prev, [key]: value }));
@@ -168,31 +168,23 @@ const LibraryFeatures = () => {
    
 
       <div className={s.bottom_container}>
-        {Object.entries(categorizedFilters).map(([category, filters]) => (
-          <div key={category} className={s.filter_category}>
-           
-            <div className={s.filter_list}>
-              {filters.map((filter) => (
-                <div
-                  key={filter}
-                  onClick={() => setActiveFilter(filter)}
-                  className={`${s.image_wrapper} ${
-                    activeFilter === filter ? s.active_border : ''
-                  }`}
-                >
-                  <ImageFilter
-                    imageUrl={imageUrl}
-                    filter={filter}
-                    preview
-                    saveImage={() => 'saveImage'}
-                    styles={{ borderRadius: 5, width: 60, height: 60 }}
-                    
-                  />
-                </div>
-              ))}
+        <div className={s.filter_list}>
+          {allFilters.map((filter) => (
+            <div
+              key={filter}
+              onClick={() => setActiveFilter(filter)}
+              className={`${s.image_wrapper} ${activeFilter === filter ? s.active_border : ''}`}
+            >
+              <ImageFilter
+                imageUrl={imageUrl}
+                filter={filter}
+                preview
+                saveImage={() => 'saveImage'}
+                styles={{ borderRadius: 5, width: 60, height: 60 }}
+              />
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
