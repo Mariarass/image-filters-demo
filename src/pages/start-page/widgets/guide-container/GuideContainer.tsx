@@ -17,13 +17,13 @@ const filterList: string[] = [
 const GuideContainer = () => {
     const defaultExample = `
 <ImageFilter 
-  imageUrl="https://mariarass.github.io/photo-hosting/image.jpg"
+  imageUrl="https://raw.githubusercontent.com/Mariarass/image-filters-demo/main/public/image.jpg"
   filter="vintageFilm" 
 />`;
 
     const advancedExample = `
 <ImageFilter
-  imageUrl="https://mariarass.github.io/photo-hosting/image.jpg"
+  imageUrl="https://raw.githubusercontent.com/Mariarass/image-filters-demo/main/public/image.jpg"
   styles={{ borderRadius: '5px' }}
   filter="vintageFilm"
   contrast={100}
@@ -40,7 +40,7 @@ const GuideContainer = () => {
 
 const saveExample = `
 <ImageFilter
-  imageUrl="https://mariarass.github.io/photo-hosting/image.jpg"
+  imageUrl="https://raw.githubusercontent.com/Mariarass/image-filters-demo/main/public/image.jpg"
   saveImage={(file) => {
     console.log('savedImage', file);
   }}
@@ -60,7 +60,7 @@ const filterOptions = [
 {filterOptions.map((filter) => (
   <ImageFilter 
     key={filter}
-    imageUrl="https://mariarass.github.io/photo-hosting/image.jpg"
+    imageUrl="https://raw.githubusercontent.com/Mariarass/image-filters-demo/main/public/image.jpg"
     filter={filter}
     styles={{ borderRadius: '5px', width: '100px', height: '100px' }}
     preview={true}
@@ -104,7 +104,7 @@ const filterOptions = [
                     {filterList.map((filter) => (
                         <ImageFilter
                             key={filter}
-                            imageUrl="https://mariarass.github.io/photo-hosting/image.jpg"
+                            imageUrl="https://raw.githubusercontent.com/Mariarass/image-filters-demo/main/public/image.jpg"
                             filter={filter}
                             styles={{ borderRadius: '5px', width: '100px', height: '100px' }}
                             preview={true}

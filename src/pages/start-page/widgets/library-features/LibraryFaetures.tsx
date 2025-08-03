@@ -4,7 +4,7 @@ import s from './LibraryFeatures.module.css';
 import Slider from '../../../../shared/ui/input/Slider.tsx';
 
 const LibraryFeatures = () => {
-  const [imageUrl, setImageUrl] = useState('https://mariarass.github.io/photo-hosting/image.jpg');
+  const [imageUrl, setImageUrl] = useState('https://raw.githubusercontent.com/Mariarass/image-filters-demo/main/public/image.jpg');
   const [activeFilter, setActiveFilter] = useState('none');
   const [savedImage, setSavedImage] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
