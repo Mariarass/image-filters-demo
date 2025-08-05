@@ -1,8 +1,29 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState, useEffect } from 'react';
 import ImageFilter from 'react-image-filters-tool';
 import s from './LibraryFeatures.module.css';
 import Slider from '../../../../shared/ui/input/Slider.tsx';
+import ColorPicker from 'react-best-gradient-color-picker'
+import { convertRgbaToHexAInGradient } from '../../../../shared/helpers/convertRgbToHex';
 
+const filterSettings: { key: string; label: string; min: number; max: number; step: number }[] = [
+  { key: 'brightness', label: 'Brightness', min: -100, max: 100, step: 1 },
+  { key: 'contrast', label: 'Contrast', min: -100, max: 100, step: 1 },
+  { key: 'saturation', label: 'Saturation', min: -100, max: 100, step: 1 },
+  { key: 'shadows', label: 'Shadows', min: -100, max: 100, step: 1 },
+  {key: 'highlights', label: 'Highlights', min: -100, max: 100, step: 1 },
+  { key: 'redChannel', label: 'Red', min: 0, max: 5, step: 0.1 },
+  { key: 'greenChannel', label: 'Green', min: 0, max: 5, step: 0.1 },
+  { key: 'blueChannel', label: 'Blue', min: 0, max: 5, step: 0.1 },
+  { key: 'hueRotate', label: 'Hue Rotate', min: 0, max: 360, step: 1 },
+  { key: 'grain', label: 'Grain', min: 0, max: 70, step: 1 },
+  { key: 'vignette', label: 'Vignette', min: 0, max: 300, step: 10 },
+];
+
+
+const allFilters = [
+  'none','tokyo','malibu', 'alpine', 'grave','amazon','roseTint', 'sunsetDream', 
+
+];
 const LibraryFeatures = () => {
   const [imageUrl, setImageUrl] = useState('https://raw.githubusercontent.com/Mariarass/image-filters-demo/main/public/image.jpg');
   const [activeFilter, setActiveFilter] = useState('none');
@@ -21,6 +42,7 @@ const LibraryFeatures = () => {
     grain: 0,
     vignette: 0,
     highlights: 0,
+ 
   };
 
   type Settings = typeof initialSettings;
@@ -28,30 +50,38 @@ const LibraryFeatures = () => {
 
   const [settings, setSettings] = useState<Settings>(initialSettings);
 
-  const filterSettings: { key: SettingsKey; label: string; min: number; max: number; step: number }[] = [
-    { key: 'brightness', label: 'Brightness', min: -100, max: 100, step: 1 },
-    { key: 'contrast', label: 'Contrast', min: -100, max: 100, step: 1 },
-    { key: 'saturation', label: 'Saturation', min: -100, max: 100, step: 1 },
-    { key: 'shadows', label: 'Shadows', min: -100, max: 100, step: 1 },
-    {key: 'highlights', label: 'Highlights', min: -100, max: 100, step: 1 },
-    { key: 'redChannel', label: 'Red', min: 0, max: 5, step: 0.1 },
-    { key: 'greenChannel', label: 'Green', min: 0, max: 5, step: 0.1 },
-    { key: 'blueChannel', label: 'Blue', min: 0, max: 5, step: 0.1 },
-    { key: 'hueRotate', label: 'Hue Rotate', min: 0, max: 360, step: 1 },
-    { key: 'grain', label: 'Grain', min: 0, max: 70, step: 1 },
-    { key: 'vignette', label: 'Vignette', min: 0, max: 300, step: 10 },
-  ];
+  const [gradientsState, setGradientsState] = useState(
+    'linear-gradient(90deg, rgba(96,93,93,0) 0%, rgba(255,255,255,0) 100%)'
+  )
+  const [solidColor, setSolidColor] = useState('rgba(96,93,93,1)')
 
-  const allFilters = [
-    'none','tokyo','malibu', 'alpine', 'grave','amazon','roseTint', 'sunsetDream', 'rusticSunset', 'sunKissed', 'goldenHour', 'amberGlow',
-    'cozySnow', 'blueLagoon', 'arcticInversion', 'deepBlue', 'cool', 'oceanBreeze',
-    'retro', 'pastel', 'vintage', 'vintageFilm',
-    'lavenderHaze', 'deep', 'moody', 'grayscale', 'noir', 'saturate', 'sepia', 'hue', 'fancyEffect', 'emeraldGlow',
-  ];
+  const [showGradientPicker, setShowGradientPicker] = useState(false);
+  const colorPickerRef = useRef<HTMLDivElement>(null);
+  const colorButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!showGradientPicker) return;
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        colorPickerRef.current &&
+        !colorPickerRef.current.contains(event.target as Node) &&
+        colorButtonRef.current &&
+        !colorButtonRef.current.contains(event.target as Node)
+      ) {
+        setShowGradientPicker(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showGradientPicker]);
+
 
   const handleChange = (key: SettingsKey, value: number) => {
     setSettings((prev) => ({ ...prev, [key]: value }));
   };
+
   const handleDownload = () => {
     if (!savedImage) return;
     console.log(savedImage)
@@ -80,6 +110,8 @@ const LibraryFeatures = () => {
 
   const handleClearSettings = () => {
     setSettings(initialSettings);
+    setActiveFilter('none');
+    setGradientsState('linear-gradient(90deg, rgba(96,93,93,0) 0%, rgba(255,255,255,0) 100%)')
   };
 
   const codeSnippet = useMemo(() => {
@@ -119,6 +151,9 @@ const LibraryFeatures = () => {
     return lines.join('\n');
   }, [settings, activeFilter]);
 
+
+
+
   return (
     <div className={s.container}>
       <div className={s.top_container}>
@@ -129,8 +164,8 @@ const LibraryFeatures = () => {
               <div className={s.filter_label}>{label}</div>
               <div className={s.filter_control}>
                 <Slider
-                  value={settings[key]}
-                  onChange={(val) => handleChange(key, val)}
+                  value={settings[key as keyof Settings]}
+                  onChange={(val) => handleChange(key as keyof Settings, val)}
                   min={min}
                   max={max}
                   step={step}
@@ -138,13 +173,39 @@ const LibraryFeatures = () => {
               </div>
             </div>
           ))}
-        </div>
+
+        <button
+          ref={colorButtonRef}
+          onClick={() => setShowGradientPicker((v) => !v)}
+          className={s.color_button}
+        >
         
+        </button>
+        {showGradientPicker && (
+          <div className={s.color_picker_container} ref={colorPickerRef}>
+           <ColorPicker
+                value={gradientsState}
+                onChange={setGradientsState}
+                className={s.color_picker}
+                hideColorGuide={true}
+                hideAdvancedSliders={true}
+                hidePresets={true}
+                hideInputs={true}
+                hideInputType={true}
+                hideColorTypeBtns={true}
+                hideEyeDrop={true}
+/>
+          </div>
+        )}
+        </div> 
+    
       <div className={s.image_container}>
       <ImageFilter
                 filter={activeFilter}
                 imageUrl={imageUrl}
                 {...settings}
+             
+                gradient={convertRgbaToHexAInGradient(gradientsState)}
                 saveImage={(file) => setSavedImage(file)}
               />
               
@@ -183,7 +244,9 @@ const LibraryFeatures = () => {
                 styles={{ borderRadius: 5, width: 60, height: 60 }}
               />
             </div>
+         
           ))}
+             <button  className={s.link}>See More</button>
         </div>
       </div>
     </div>

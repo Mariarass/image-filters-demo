@@ -11,8 +11,8 @@ const StartPage:FC = () => {
 
           <div className={s.container}>
               <div className={s.header}>
-              Filters That Fit Your Vision<br/>
-              Choose from 100+ or Create Custom Looks
+              Filters That Fit Your Vision for<br/>
+              Choose from 100+ or Create Custom Looks 
               </div>
               <LaptopContainer>
                   <LibraryFeatures/>

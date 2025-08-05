@@ -19,7 +19,7 @@
 
 .slider_input::-webkit-slider-runnable-track {
     height: 2px;
-    background: #999; 
+    background: #999999; 
     border-radius: 2px;
 }
 
@@ -35,7 +35,7 @@
     height: 13px;
     width:13px;
     margin-top: -7px; 
-    background: #5a6a6f; 
+    background: #577e8a; 
     border-radius: 50%;
     cursor: pointer;
 
@@ -60,7 +60,7 @@
 }
 
 .slider_input:focus::-webkit-slider-thumb {
-    outline: 2px solid #5a6a6f;
+    outline: 2px solid #6c929e;
 }
 .slider_input:focus::-moz-range-thumb {
     outline: 2px solid #5a6a6f;

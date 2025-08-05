@@ -42,7 +42,15 @@ const saveExample = `
 <ImageFilter
   imageUrl="https://raw.githubusercontent.com/Mariarass/image-filters-demo/main/public/image.jpg"
   saveImage={(file) => {
-    console.log('savedImage', file);
+    if (!savedImage) return;
+    const url = URL.createObjectURL(savedImage);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = savedImage.name || 'filtered-image.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   }}
 />`;
 
@@ -95,7 +103,7 @@ const filterOptions = [
                 <CodeSnippet code={saveExample} />
             </div>
 
-            <div className={s.block_container}>
+            {/* <div className={s.block_container}>
                 <p className={s.header}>FILTER PREVIEWS <span>(default filters only)</span></p>
                 <p className={s.text}>
                     You can preview default filters in small thumbnails. This helps users choose the best one.
@@ -112,7 +120,7 @@ const filterOptions = [
                     ))}
                 </div>
                 <CodeSnippet code={previewExample} />
-            </div>
+            </div> */}
         </div>
     );
 };
