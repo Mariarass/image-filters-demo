@@ -27,3 +27,28 @@
     font-size: 16px;
 
 }
+
+@media (max-width: 1400px) {
+    .container{
+     
+        margin-top: 32px;
+        padding: 0 8px 32px;
+    }
+    .block_container{
+        margin-bottom: 32px;
+    }
+    .header{
+        font-size: 14px;
+    }
+    .text{
+        font-size: 14px;
+    }
+    .list{
+        flex-wrap: wrap;
+    }
+}
+@media (max-width: 1024px) {
+    .container{
+        width: 90%;
+    }
+}

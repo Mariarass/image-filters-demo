@@ -12,3 +12,12 @@
     /*height: 70%;*/
     /*top:200px*/
 }
+
+@media (max-width: 1400px) {
+    .container{
+  
+        padding: 16px;
+        box-shadow: 0 4px 60px -8px #3FB7CF;
+        border-radius: 24px;
+    }
+}

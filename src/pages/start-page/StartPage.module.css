@@ -30,6 +30,21 @@
     color: #F9F9F9;
 
 }
+
+@media (max-width: 1400px) {
+    .container{
+        padding: 24px 16px 60px;
+        gap: 32px;
+    }
+    .header{
+        width: 100%;
+        font-size: 28px;
+        line-height: 1.2;
+        margin-top: 32px;
+        margin-bottom: 24px;
+        text-align: left;
+    }
+}
 .btn{
     background: #eff3f4;
     border: none;

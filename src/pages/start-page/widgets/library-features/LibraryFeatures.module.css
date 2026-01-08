@@ -292,3 +292,44 @@ position: relative;
     color: #929394;
     font-weight: 500;
 }
+
+@media (max-width: 1400px) {
+    .container{
+        border-radius: 20px;
+    }
+    .top_container{
+        flex-direction: column;
+        gap: 24px;
+        padding: 20px;
+        height: auto;
+    }
+    .settings{
+        width: 100%;
+    }
+    .image_container{
+        width: 100%;
+    }
+    .download_button{
+        position: static;
+        justify-content: flex-start;
+        margin: 12px 0 0;
+        flex-wrap: wrap;
+    }
+    .button{
+        width: 100%;
+    }
+    .bottom_container{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 0 20px 20px;
+    }
+    .filter_list{
+        margin-left: 0;
+        gap: 12px;
+    }
+    .filter_image{
+        width: 70px;
+        height: 70px;
+    }
+}
